@@ -5,6 +5,15 @@ namespace SFLog
 {
     public class Log
     {
+        #region Constants
+
+        private const string DebugTag = "DEBUG";
+        private const string ErrorTag = "ERROR";
+        private const string InfoTag = "INFO ";
+        private const string WarnTag = "WARN ";
+
+        #endregion Constants
+
         #region Members
 
         private static string logFile = null;
@@ -90,6 +99,8 @@ namespace SFLog
 
         #region Public Methods
 
+        #region Debug
+
         /// <summary>
         /// Debugs the specified type.
         /// </summary>
@@ -98,7 +109,7 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Debug(Type type, string method, string message)
         {
-            WriteLogMessage("DEBUG", type.FullName, method, message);
+            WriteLogMessage(DebugTag, type.FullName, method, message);
         }
 
         /// <summary>
@@ -109,8 +120,12 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Debug(object classObject, string method, string message)
         {
-            WriteLogMessage("DEBUG", classObject.GetType().FullName, method, message);
+            WriteLogMessage(DebugTag, classObject.GetType().FullName, method, message);
         }
+
+        #endregion Debug
+
+        #region Error
 
         /// <summary>
         /// Errors the specified type.
@@ -120,7 +135,7 @@ namespace SFLog
         /// <param name="exception">The exception.</param>
         public static void Error(Type type, string method, Exception exception)
         {
-            WriteLogMessage("ERROR", type.FullName, method, LogMsg.ExceptionMessage(exception));
+            WriteLogMessage(ErrorTag, type.FullName, method, LogMsg.ExceptionMessage(exception));
         }
 
         /// <summary>
@@ -131,8 +146,12 @@ namespace SFLog
         /// <param name="exception">The exception.</param>
         public static void Error(object classObject, string method, Exception exception)
         {
-            WriteLogMessage("ERROR", classObject.GetType().FullName, method, LogMsg.ExceptionMessage(exception));
+            WriteLogMessage(ErrorTag, classObject.GetType().FullName, method, LogMsg.ExceptionMessage(exception));
         }
+
+        #endregion Error
+
+        #region Info
 
         /// <summary>
         /// Informations the specified type.
@@ -142,8 +161,23 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Info(Type type, string method, string message)
         {
-            WriteLogMessage("INFO ", type.FullName, method, message);
+            WriteLogMessage(InfoTag, type.FullName, method, message);
         }
+
+        /// <summary>
+        /// Informations the specified class object.
+        /// </summary>
+        /// <param name="classObject">The class object.</param>
+        /// <param name="method">The method.</param>
+        /// <param name="message">The message.</param>
+        public static void Info(object classObject, string method, string message)
+        {
+            WriteLogMessage(InfoTag, classObject.GetType().FullName, method, message);
+        }
+
+        #endregion Info
+
+        #region Warn
 
         /// <summary>
         /// Warns the specified type.
@@ -153,8 +187,21 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Warn(Type type, string method, string message)
         {
-            WriteLogMessage("WARN ", type.FullName, method, message);
+            WriteLogMessage(WarnTag, type.FullName, method, message);
         }
+
+        /// <summary>
+        /// Warns the specified class object.
+        /// </summary>
+        /// <param name="classObject">The class object.</param>
+        /// <param name="method">The method.</param>
+        /// <param name="message">The message.</param>
+        public static void Warn(object classObject, string method, string message)
+        {
+            WriteLogMessage(WarnTag, classObject.GetType().FullName, method, message);
+        }
+
+        #endregion Warn
 
         #endregion Public Methods
 

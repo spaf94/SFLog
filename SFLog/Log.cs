@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFLog.Enums;
+using System;
 using System.IO;
 
 namespace SFLog
@@ -30,6 +31,26 @@ namespace SFLog
         #endregion Constants
 
         #region Members
+
+        /// <summary>
+        /// The is debug logged
+        /// </summary>
+        private static bool IsDebugLogged = true;
+
+        /// <summary>
+        /// The is error logged
+        /// </summary>
+        private static bool IsErrorLogged = true;
+
+        /// <summary>
+        /// The is information logged
+        /// </summary>
+        private static bool IsInfoLogged = true;
+
+        /// <summary>
+        /// The is warn logged
+        /// </summary>
+        private static bool IsWarnLogged = true;
 
         /// <summary>
         /// The log file
@@ -147,6 +168,32 @@ namespace SFLog
         }
 
         /// <summary>
+        /// Sets the log level.
+        /// </summary>
+        /// <param name="logLevel">The log level.</param>
+        public static void SetLogLevel(LogLevel logLevel)
+        {
+            switch (logLevel)
+            {
+                case LogLevel.Debug:
+                    SetLogLevel(true, true, true, true);
+                    break;
+
+                case LogLevel.Info:
+                    SetLogLevel(false, true, true, true);
+                    break;
+
+                case LogLevel.Warn:
+                    SetLogLevel(false, false, true, true);
+                    break;
+
+                case LogLevel.Error:
+                    SetLogLevel(false, false, false, true);
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Sets the name of the logs folder.
         /// </summary>
         /// <param name="logsFolderName">Name of the logs folder.</param>
@@ -167,7 +214,10 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Debug(Type type, string method, string message)
         {
-            WriteLogMessage(DebugTag, type.FullName, method, message);
+            if (IsDebugLogged)
+            {
+                WriteLogMessage(DebugTag, type.FullName, method, message);
+            }
         }
 
         /// <summary>
@@ -178,7 +228,10 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Debug(object classObject, string method, string message)
         {
-            WriteLogMessage(DebugTag, classObject.GetType().FullName, method, message);
+            if (IsDebugLogged)
+            {
+                WriteLogMessage(DebugTag, classObject.GetType().FullName, method, message);
+            }
         }
 
         #endregion Debug
@@ -193,7 +246,10 @@ namespace SFLog
         /// <param name="exception">The exception.</param>
         public static void Error(Type type, string method, Exception exception)
         {
-            WriteLogMessage(ErrorTag, type.FullName, method, LogMsg.GetExceptionMessage(exception));
+            if (IsErrorLogged)
+            {
+                WriteLogMessage(ErrorTag, type.FullName, method, LogMsg.GetExceptionMessage(exception));
+            }
         }
 
         /// <summary>
@@ -204,7 +260,10 @@ namespace SFLog
         /// <param name="exception">The exception.</param>
         public static void Error(object classObject, string method, Exception exception)
         {
-            WriteLogMessage(ErrorTag, classObject.GetType().FullName, method, LogMsg.GetExceptionMessage(exception));
+            if (IsErrorLogged)
+            {
+                WriteLogMessage(ErrorTag, classObject.GetType().FullName, method, LogMsg.GetExceptionMessage(exception));
+            }
         }
 
         #endregion Error
@@ -219,7 +278,10 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Info(Type type, string method, string message)
         {
-            WriteLogMessage(InfoTag, type.FullName, method, message);
+            if (IsInfoLogged)
+            {
+                WriteLogMessage(InfoTag, type.FullName, method, message);
+            }
         }
 
         /// <summary>
@@ -230,7 +292,10 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Info(object classObject, string method, string message)
         {
-            WriteLogMessage(InfoTag, classObject.GetType().FullName, method, message);
+            if (IsInfoLogged)
+            {
+                WriteLogMessage(InfoTag, classObject.GetType().FullName, method, message);
+            }
         }
 
         #endregion Info
@@ -245,7 +310,10 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Warn(Type type, string method, string message)
         {
-            WriteLogMessage(WarnTag, type.FullName, method, message);
+            if (IsWarnLogged)
+            {
+                WriteLogMessage(WarnTag, type.FullName, method, message);
+            }
         }
 
         /// <summary>
@@ -256,7 +324,10 @@ namespace SFLog
         /// <param name="message">The message.</param>
         public static void Warn(object classObject, string method, string message)
         {
-            WriteLogMessage(WarnTag, classObject.GetType().FullName, method, message);
+            if (IsWarnLogged)
+            {
+                WriteLogMessage(WarnTag, classObject.GetType().FullName, method, message);
+            }
         }
 
         #endregion Warn
@@ -264,6 +335,21 @@ namespace SFLog
         #endregion Public Methods
 
         #region Private Methods
+
+        /// <summary>
+        /// Sets the log level.
+        /// </summary>
+        /// <param name="isDebugLogged">if set to <c>true</c> [is debug logged].</param>
+        /// <param name="isInfoLogged">if set to <c>true</c> [is information logged].</param>
+        /// <param name="isWarnLogged">if set to <c>true</c> [is warn logged].</param>
+        /// <param name="isErrorLogged">if set to <c>true</c> [is error logged].</param>
+        private static void SetLogLevel(bool isDebugLogged, bool isInfoLogged, bool isWarnLogged, bool isErrorLogged)
+        {
+            IsDebugLogged = isDebugLogged;
+            IsInfoLogged = isInfoLogged;
+            IsWarnLogged = isWarnLogged;
+            IsErrorLogged = isErrorLogged;
+        }
 
         /// <summary>
         /// Writes the log message.

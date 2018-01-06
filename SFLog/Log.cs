@@ -7,18 +7,54 @@ namespace SFLog
     {
         #region Constants
 
+        /// <summary>
+        /// The debug tag
+        /// </summary>
         private const string DebugTag = "DEBUG";
+
+        /// <summary>
+        /// The error tag
+        /// </summary>
         private const string ErrorTag = "ERROR";
+
+        /// <summary>
+        /// The information tag
+        /// </summary>
         private const string InfoTag = "INFO ";
+
+        /// <summary>
+        /// The warn tag
+        /// </summary>
         private const string WarnTag = "WARN ";
 
         #endregion Constants
 
         #region Members
 
+        /// <summary>
+        /// The log file
+        /// </summary>
         private static string logFile = null;
+
+        /// <summary>
+        /// The log file name
+        /// </summary>
         private static string logFileName = null;
+
+        /// <summary>
+        /// The logs path
+        /// </summary>
         private static string logsPath = null;
+
+        /// <summary>
+        /// The temporary log file name
+        /// </summary>
+        private static string tempLogFileName = "log";
+
+        /// <summary>
+        /// The temporary logs folder name
+        /// </summary>
+        private static string tempLogsFolderName = "logs";
 
         #endregion Members
 
@@ -69,7 +105,7 @@ namespace SFLog
             {
                 if (string.IsNullOrWhiteSpace(logFileName))
                 {
-                    logFileName = string.Format("log_{0}.log", DateTime.Today.ToString("yyyyMMdd"));
+                    logFileName = string.Format("{0}_{1}.log", tempLogFileName, DateTime.Today.ToString("yyyyMMdd"));
                 }
 
                 return logFileName;
@@ -88,7 +124,7 @@ namespace SFLog
             {
                 if (string.IsNullOrWhiteSpace(logsPath))
                 {
-                    logsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+                    logsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, tempLogsFolderName);
                 }
 
                 return logsPath;
@@ -98,6 +134,28 @@ namespace SFLog
         #endregion Properties
 
         #region Public Methods
+
+        #region Set
+
+        /// <summary>
+        /// Sets the name of the log file.
+        /// </summary>
+        /// <param name="logFileName">Name of the log file.</param>
+        public static void SetLogFileName(string logFileName)
+        {
+            tempLogFileName = logFileName;
+        }
+
+        /// <summary>
+        /// Sets the name of the logs folder.
+        /// </summary>
+        /// <param name="logsFolderName">Name of the logs folder.</param>
+        public static void SetLogsFolderName(string logsFolderName)
+        {
+            tempLogsFolderName = logsFolderName;
+        }
+
+        #endregion Set
 
         #region Debug
 
@@ -135,7 +193,7 @@ namespace SFLog
         /// <param name="exception">The exception.</param>
         public static void Error(Type type, string method, Exception exception)
         {
-            WriteLogMessage(ErrorTag, type.FullName, method, LogMsg.ExceptionMessage(exception));
+            WriteLogMessage(ErrorTag, type.FullName, method, LogMsg.GetExceptionMessage(exception));
         }
 
         /// <summary>
@@ -146,7 +204,7 @@ namespace SFLog
         /// <param name="exception">The exception.</param>
         public static void Error(object classObject, string method, Exception exception)
         {
-            WriteLogMessage(ErrorTag, classObject.GetType().FullName, method, LogMsg.ExceptionMessage(exception));
+            WriteLogMessage(ErrorTag, classObject.GetType().FullName, method, LogMsg.GetExceptionMessage(exception));
         }
 
         #endregion Error
@@ -233,7 +291,7 @@ namespace SFLog
             }
             catch (Exception exception)
             {
-                Console.WriteLine(LogMsg.ExceptionMessage(exception));
+                Console.WriteLine(LogMsg.GetExceptionMessage(exception));
             }
         }
 

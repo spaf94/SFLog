@@ -87,7 +87,7 @@ namespace SFLog
         /// <value>
         /// The string date.
         /// </value>
-        public static string StringDate
+        private static string StringDate
         {
             get
             {

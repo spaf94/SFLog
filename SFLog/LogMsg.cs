@@ -47,11 +47,22 @@ namespace SFLog
         /// <returns></returns>
         public static string GetExceptionMessage(Exception exception)
         {
-            StringBuilder sbExceptionMessage = new StringBuilder();
-            sbExceptionMessage.AppendLine(exception.Message);
-            sbExceptionMessage.AppendLine(exception.StackTrace);
+            string exceptionMessage = null;
 
-            return sbExceptionMessage.ToString();
+            if (exception != null)
+            {
+                if (!string.IsNullOrWhiteSpace(exception.Message))
+                {
+                    exceptionMessage += exception.Message;
+                }
+
+                if (!string.IsNullOrWhiteSpace(exception.StackTrace))
+                {
+                    exceptionMessage += Environment.NewLine + exception.StackTrace;
+                }
+            }
+
+            return exceptionMessage;
         }
 
         /// <summary>

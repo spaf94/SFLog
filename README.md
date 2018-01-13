@@ -26,3 +26,6 @@ Added new features to the library:
 - Set log level
 - Set log file name
 - Get object as JSON string
+
+### 1.18.1.13
+Small bugs fixes

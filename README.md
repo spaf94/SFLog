@@ -13,6 +13,9 @@ SFLog is an C# log library to use in your C# projects.
 ## Issues
 If you find any bugs, please submit an [issue](https://github.com/spaf94/SFLog/issues/new/).
 
+## How to use
+Read the wiki page [How to use](https://github.com/spaf94/SFLog/wiki/How-to-use). 
+
 ## Releases
 
 ### 1.17.12.23

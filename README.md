@@ -1,6 +1,6 @@
 # ​SFLog
 
-SFLog is an C# log library to use in your C# projects.
+SFLog is an .NET log library to use in your .NET projects.
 
 ## ​Features
 - Set logs folder name
@@ -11,24 +11,10 @@ SFLog is an C# log library to use in your C# projects.
 - Get object as JSON string
 
 ## Issues
-If you find any bugs, please submit an [issue](https://github.com/spaf94/SFLog/issues/new/).
+If you find any bugs, please submit an [issue](https://github.com/spaf94/dotnet-sf-log/issues/new/).
 
 ## How to use
-Read the wiki page [How to use](https://github.com/spaf94/SFLog/wiki/How-to-use). 
+Read the wiki page [How to use](https://github.com/spaf94/dotnet-sf-log/wiki/How-to-use). 
 
 ## Releases
-
-### 1.17.12.23
-Simple log library with the following features:
-- Write debug, info, warn or error log messages
-- Get treated exception message
-
-### 1.18.1.6
-Added new features to the library:
-- Set logs folder name
-- Set log level
-- Set log file name
-- Get object as JSON string
-
-### 1.18.1.13
-Small bugs fixes
+Read the [Releases](https://github.com/spaf94/dotnet-sf-log/releases) page to check new versions and news.

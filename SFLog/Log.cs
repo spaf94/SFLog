@@ -77,23 +77,14 @@ namespace SFLog
         /// </summary>
         private static string tempLogsFolderName = "logs";
 
+        /// <summary>
+        /// The throw exception
+        /// </summary>
+        private static bool ThrowException = true;
+
         #endregion Members
 
         #region Properties
-
-        /// <summary>
-        /// Gets the string date.
-        /// </summary>
-        /// <value>
-        /// The string date.
-        /// </value>
-        private static string StringDate
-        {
-            get
-            {
-                return DateTime.Now.ToString();
-            }
-        }
 
         /// <summary>
         /// Gets the log file.
@@ -152,6 +143,20 @@ namespace SFLog
             }
         }
 
+        /// <summary>
+        /// Gets the string date.
+        /// </summary>
+        /// <value>
+        /// The string date.
+        /// </value>
+        private static string StringDate
+        {
+            get
+            {
+                return DateTime.Now.ToString();
+            }
+        }
+
         #endregion Properties
 
         #region Public Methods
@@ -200,6 +205,24 @@ namespace SFLog
         public static void SetLogsFolderName(string logsFolderName)
         {
             tempLogsFolderName = logsFolderName;
+        }
+
+        /// <summary>
+        /// Sets the logs path.
+        /// </summary>
+        /// <param name="logsFullPath">The logs full path.</param>
+        public static void SetLogsPath(string logsFullPath)
+        {
+            logsPath = logsFullPath;
+        }
+
+        /// <summary>
+        /// Sets the throw exception on write error.
+        /// </summary>
+        /// <param name="throwException">if set to <c>true</c> [throw exception].</param>
+        public static void SetThrowExceptionOnWriteError(bool throwException)
+        {
+            ThrowException = throwException;
         }
 
         #endregion Set
@@ -378,6 +401,11 @@ namespace SFLog
             catch (Exception exception)
             {
                 Console.WriteLine(LogMsg.GetExceptionMessage(exception));
+
+                if (ThrowException)
+                {
+                    throw new Exception(exception.Message, exception);
+                }
             }
         }
 

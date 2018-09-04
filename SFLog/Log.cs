@@ -53,16 +53,6 @@ namespace SFLog
         private static bool IsWarnLogged = true;
 
         /// <summary>
-        /// The log file
-        /// </summary>
-        private static string logFile = null;
-
-        /// <summary>
-        /// The log file name
-        /// </summary>
-        private static string logFileName = null;
-
-        /// <summary>
         /// The logs path
         /// </summary>
         private static string logsPath = null;
@@ -96,12 +86,7 @@ namespace SFLog
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(logFile))
-                {
-                    logFile = Path.Combine(LogsPath, LogFileName);
-                }
-
-                return logFile;
+                return Path.Combine(LogsPath, LogFileName);
             }
         }
 
@@ -115,12 +100,7 @@ namespace SFLog
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(logFileName))
-                {
-                    logFileName = string.Format("{0}_{1}.log", tempLogFileName, DateTime.Today.ToString("yyyyMMdd"));
-                }
-
-                return logFileName;
+                return string.Format("{0}_{1}.log", tempLogFileName, DateTime.Today.ToString("yyyyMMdd"));
             }
         }
 
